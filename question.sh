@@ -41,3 +41,29 @@
 #
 #  >>> Escriba su codigo a partir de este punto <<<
 #
+
+
+# Desarrollo
+# Cambiar Comas por puntos
+sed 's/,/./g' $1 |
+
+# Cambiar punto y comas por comas
+sed 's/;/,/g' |
+
+# Cambiar el formato de las fechas
+sed 's/\([0-9][0-9]\)\/\([0-9][0-9]\)\/\([0-9][0-9]\)/20\3-\2-\1/g' |
+sed  's/\([0-9]\)\/\([0-9]\)\/\(20[0-9][0-9]\)/\3-0\2-0\1/g' |
+
+# Agregar nulos
+## Modificar las y y \n existentes
+sed 's/n\|\n/\\N/g' |
+sed 's/N\|\n/\\N/g' |
+sed 's/\\\\N/\\N/g' |
+sed 's/\\\\N/\\N/g' |
+# Modificar comas consecutivas
+sed 's/,,/,\\N,/g' |
+# Termina en coma
+sed 's/,\{1,\}$/,\\N/' |
+
+# Minúsculas a mayúsculas
+sed 's/[a-z]/\U&/g'
